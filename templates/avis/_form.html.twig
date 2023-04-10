@@ -1,0 +1,24 @@
+<div style="text-align: center; margin: 0 auto;">
+{{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+<div style="text-align:center;">
+ {{ form_label(form.role, 'Role', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+        {{ form_widget(form.role, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+    </div>
+    
+<div style="text-align:center;">
+        {{ form_label(form.nv_satif, 'Niveau de satisfaction', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+        {{ form_widget(form.nv_satif, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+    </div>    
+<div style="text-align:center;">
+        {{ form_label(form.comment, 'commenatire', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+        {{ form_widget(form.comment, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+    </div>    
+
+<div style="text-align:center;">
+        {{ form_label(form.user, 'user_id', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+        {{ form_widget(form.user, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+    </div> 
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+</div>
