@@ -1,0 +1,43 @@
+<div style="text-align: center; margin: 0 auto;">
+    {{ form_start(form,{attr:{novalidate:'novalidate'}, style:'width: 50%;'}) }}
+    
+    <div style="text-align:center;">
+        {{ form_label(form.cin, 'Cin', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+        {{ form_widget(form.cin, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+    </div>
+
+    <div style="text-align:center;">
+        {{ form_label(form.nom, 'Nom', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+        {{ form_widget(form.nom, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+    </div>
+    
+    <div style="text-align:center;">
+        {{ form_label(form.prenom, 'Prenom', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+        {{ form_widget(form.prenom, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+    </div>
+    
+    <div style="text-align:center;">
+        {{ form_label(form.mail, 'Mail', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+        {{ form_widget(form.mail, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+    </div>
+    
+    <div style="text-align:center;">
+    {{ form_label(form.password, 'Password', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+    {{ form_widget(form.password, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+
+</div>
+
+    <div style="text-align:center;">
+        {{ form_label(form.role, 'Role', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+        {{ form_widget(form.role, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+    </div>
+
+    <div style="text-align:center;">
+        {{ form_label(form.tel, 'Telephone', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+        {{ form_widget(form.tel, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+    </div>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    
+    {{ form_end(form) }}
+</div>
