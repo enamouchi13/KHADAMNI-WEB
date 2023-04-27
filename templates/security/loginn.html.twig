@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body%}
+{% include 'navbar.html.twig' %}
+<div style="text-align: center; margin: 0 auto;">
+<div>{{error}}</div>
+<div>{{e}}</div>
+    {{ form_start(form,{attr:{novalidate:'novalidate'}, style:'width: 50%;'}) }}
+    
+   
+        <div class="container-fluid bg-primary bg-quote py-5" style="margin: 90px 0;">
+        <div class="container py-5">
+            <div class="row g-0 justify-content-start">
+                <div class="col-lg-6">
+                    <div class="bg-white text-center p-5">
+                        <h1 class="mb-4"> Login </h1>
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-12 col-sm-6">
+    <div style="text-align:center;">
+        {{ form_label(form.mail, 'Mail', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+        {{ form_widget(form.mail, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+    </div>
+    
+    <div style="text-align:center;">
+    {{ form_label(form.password, 'Password', {'label_attr': {'style': 'display:inline-block; width: 100px;' }}) }}
+    {{ form_widget(form.password, {'attr': {'style': 'display:inline-block; width: 200px;' }}) }}
+             </form>
+
+            
+                    </div>
+                    
+                </div>
+                 <button class="btn btn-warning">{{ button_label|default('Save') }}</button>
+                     <a href="{{ path('app_forget') }}" class="btn btn-info">Foeget Password! </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    
+    
+    {{ form_end(form) }}
+</div>
+
+{% include 'footer.html.twig' %}
+{% endblock %}
