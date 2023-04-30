@@ -11,7 +11,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - GymPlus</title>
+  <title>Dashboard - IWORK</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
@@ -74,7 +74,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="/front" class="logo d-flex align-items-center">
         <img src="assets_back/img/logo.png" alt="">
-        <span class="d-none d-lg-block">GymPlus</span>
+        <span class="d-none d-lg-block">I Work Page Admin </span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -239,7 +239,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets_back/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+             <img src="{{asset('assets_back/img/messages-1.jpg')}}" alt="profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -283,7 +283,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="/front">
+              <a class="dropdown-item d-flex align-items-center" href="/loginn">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -347,13 +347,18 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="/client">
-              <i class="bi bi-circle"></i><span>Clients</span>
+            <a href="/stats1">
+              <i class="bi bi-circle"></i><span>Statistique de Clients  </span>
             </a>
           </li>
           <li>
-            <a href="/abonnement">
-              <i class="bi bi-circle"></i><span>Subscriptions</span>
+            <a href="/avis">
+              <i class="bi bi-circle"></i><span>Les Avis des Clients </span>
+            </a>
+          </li>
+           <li>
+            <a href="/map">
+              <i class="bi bi-circle"></i><span>Localisation de nos Clients </span>
             </a>
           </li>
         </ul>
@@ -371,7 +376,7 @@
           </li>
           <li>
             <a href="/fournisseur">
-              <i class="bi bi-circle"></i><span>Vendor</span>
+              <i class="bi bi-circle"></i><span>Fourness  </span>
             </a>
           </li>
         </ul>
