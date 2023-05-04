@@ -1,0 +1,39 @@
+{% extends 'base1.html.twig' %}
+
+{% block body %}
+    <div class="card-body pb-0">
+        <h5 class="card-title">Top Selling <span>| Today</span></h5>
+
+        <table class="table table-borderless">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Article</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Content</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for commentaire in commentaires %}
+            <tr>
+                <td> {{  commentaire.id}}</td>
+                <td> {{  commentaire.getArticle().title}}</td>
+                <td> {{ commentaire.nameUser}}</td>
+                <td> {{ commentaire.content}}</td>
+
+
+                <td><a href="{{path('app_deletecommentaire',{id:commentaire.id})}} " class="card-link">Delete</a> </td>
+
+
+                {% endfor %}
+
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

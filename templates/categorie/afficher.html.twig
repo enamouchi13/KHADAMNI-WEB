@@ -1,0 +1,36 @@
+{% extends 'base1.html.twig' %}
+{% block body %}
+    <div class="card-body pb-0">
+        <h5 class="card-title">Top Selling <span>| Today</span></h5>
+
+        <table class="table table-borderless">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Fournisseur</th>
+                <th scope="col">Nom</th>
+                <th scope="col">UsagePro</th>
+                <th scope="col">Qualite</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for categorie in categories %}
+            <tr>
+                <td> {{ categorie.id}}</td>
+                <td> {{ categorie.fournisseur}}</td>
+                <td> {{categorie.nomc}}</td>
+                <td>{{categorie.usagepro}}</td>
+                <td>{{categorie.qualite}}</td>
+                <td><a href="{{path('app_deletecategorie',{id:categorie.id})}} " class="card-link">Delete</a> </td>
+                <td><a href="{{path('app_add',{id:categorie.id})}} " class="card-link">Edit</a></td>
+
+                {% endfor %}
+
+            </tr>
+
+            </tbody>
+        </table>
+        <td><a href="{{path('app_add')}} " class="card-link">Add</a></td>
+    </div>
+{% endblock %}
