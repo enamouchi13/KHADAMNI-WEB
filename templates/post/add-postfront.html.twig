@@ -1,6 +1,7 @@
-
-
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm px-5 py-3 py-lg-0">
+{% extends 'base.html.twig' %}
+{% block title %}New Post{% endblock %}
+{% block body %}
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm px-5 py-3 py-lg-0">
         <a href="index.html" class="navbar-brand p-0">
             <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-paint-roller text-secondary me-3"></i>Painter</h1>
         </a>
@@ -11,7 +12,8 @@
             <div class="navbar-nav ms-auto py-0 pe-4 border-end border-5 border-primary">
 
 
-                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="{{ user.role == 'fourniseur' ? path('app_homefourniseur') : path('app_homeouvrier') }}" class="nav-item nav-link">Back</a>
+
                 <a href="service.html" class="nav-item nav-link">Service</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -34,3 +36,7 @@
         </div>
     </nav>
 
+    {{ form(form) }}
+
+    {% include 'footer.html.twig' %}
+{% endblock %}

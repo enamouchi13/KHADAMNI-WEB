@@ -1,0 +1,41 @@
+{% extends 'base1.html.twig' %}
+{% block body %}
+    <div class="card-body pb-0">
+        <h5 class="card-title">Top Selling <span>| Today</span></h5>
+
+        <table class="table table-borderless">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Categorie</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Quantite</th>
+                <th scope="col">valabilite</th>
+                <th scope="col">Image</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for materiel in materiels %}
+            <tr>
+                <td> {{ materiel.id}}</td>
+                <td> {{ materiel.getCategorie().nomc}}</td>
+                <td> {{materiel.nomm}}</td>
+                <td> {{materiel.prix}}</td>
+                <td>{{materiel.quantite}}</td>
+                <td>{{materiel.valabilite | date('Y-m-d H:i:s')}}</td>
+                <td><img  src="{{ asset('uploads/' ~ materiel.image) }}" width="50" height="50" alt="{{materiel.image}}"></td>
+
+                <td><a href="{{path('app_deletemateriel',{id:materiel.id})}} " class="card-link">Delete</a> </td>
+                <td><a href="{{path('app_addmateriel',{id:materiel.id})}} " class="card-link">Edit</a></td>
+
+                {% endfor %}
+
+            </tr>
+
+            </tbody>
+        </table>
+        <td><a href="{{path('app_addmateriel')}} " class="card-link">Add</a></td>
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base1.html.twig' %}
+{% block body %}
+
+<div>
+    <canvas id="myChart"></canvas>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{  categNom | raw}},
+            datasets: [{
+                label: 'Liste Des Categories',
+                data: {{ catacount | raw }},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

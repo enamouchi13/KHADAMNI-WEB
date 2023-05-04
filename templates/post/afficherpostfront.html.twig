@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block body %}
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm px-5 py-3 py-lg-0">
+        <a href="index.html" class="navbar-brand p-0">
+            <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-paint-roller text-secondary me-3"></i>Painter</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0 pe-4 border-end border-5 border-primary">
+
+
+                <a href="{{ user.role == 'fourniseur' ? path('app_homefourniseur') : path('app_homeouvrier') }}" class="nav-item nav-link">Back</a>
+
+                <a href="service.html" class="nav-item nav-link">Service</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                        <a href="detail.html" class="dropdown-item">Blog Detail</a>
+                        <a href="team.html" class="dropdown-item">The Team</a>
+                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            <div class="d-none d-lg-flex align-items-center ps-4">
+                <i class="fa fa-2x fa-mobile-alt text-secondary me-3"></i>
+                <div>
+                    <h5 class="text-primary mb-1"><small>Call Now</small></h5>
+                    <h6 class="text-light m-0">+012 345 6789</h6>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Single Item with Comments</title>
+        <style>
+            .item {
+                margin-bottom: 20px;
+                /* Add additional styles as needed */
+            }
+
+            .item-image {
+                margin-bottom: 10px;
+                /* Add additional styles as needed */
+            }
+
+            .item-content {
+                /* Add additional styles as needed */
+            }
+
+            .item-text {
+                /* Add additional styles as needed */
+            }
+
+            .comments {
+                margin-top: 20px;
+                /* Add additional styles as needed */
+            }
+
+            .comment {
+                margin-bottom: 10px;
+                /* Add additional styles as needed */
+            }
+
+            .comment-text {
+                /* Add additional styles as needed */
+            }
+        </style>
+    </head>
+    <body>
+    <div class="item">
+        <div class="item-image">
+            <img class="img-fluid" src="{{ asset('uploads/' ~ post.image) }}" alt="{{ post.image }}">
+        </div>
+        <div class="item-content">
+            <p class="item-text">{{ post.content }}</p>
+        </div>
+    </div>
+
+    <h3>Leave A Comment</h3>
+
+    {% if user  %}
+    {{ form_start(form) }}
+    {{ form_widget(form.content,{'attr':{'class':'form form-control','placeholder':'comment..'}}) }}
+    {{ form_widget(form.article,{'attr':{'class':'form form-control'}}) }}
+    {{ form_rest(form) }}
+    {% else %}
+        you must login to leave a comment -<a href="{{ path('loginn') }}">Login</a>
+    {% endif %}
+
+
+
+    <ul class="comments-list">
+        {% for comment in comments %}
+        <li class="comment">
+<div class="comment-body">
+<h3>{{ comment.nameUser }} </h3>
+    <p>{{ comment.content }}</p>
+
+
+
+</div>
+
+
+
+        </li>
+        {% endfor %}
+
+
+
+    </ul>
+    </body>
+    </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% include 'footer.html.twig' %}
+
+{% endblock %}
