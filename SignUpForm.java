@@ -61,7 +61,7 @@ public class SignUpForm extends BaseForm {
         vectorRole = new Vector();
         
         vectorRole.add("Client");
-        vectorRole.add("ouvriert");
+        vectorRole.add("ouvrier");
         vectorRole.add("Fournisseur");
         
         ComboBox<String>role = new ComboBox<>(vectorRole);

@@ -101,7 +101,7 @@ public class WalkthruForm extends Form {
             rbs[iter].setUIID("Label");
             radioContainer.add(rbs[iter]);
         }
-                
+                   
         rbs[0].setSelected(true);
         t.addSelectionListener((i, ii) -> {
             if(!rbs[ii].isSelected()) {
@@ -113,6 +113,18 @@ public class WalkthruForm extends Form {
         Button skip = new Button("Profile");
         skip.setUIID("SkipButton");
         skip.addActionListener(e -> new ProfileForm(res).show());
+        
+        
+        /*
+        Button Appliquer = new Button("Add service");
+        t.add(Appliquer);
+        Appliquer.requestFocus();
+        Appliquer.addActionListener(e -> new AjoutServiceForm(res).show());*/
+
+        
+        
+        
+         
         
         Container welcomeNoteArea = BoxLayout.encloseY(message,
                 LayeredLayout.encloseIn(
