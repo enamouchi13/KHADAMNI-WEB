@@ -84,8 +84,11 @@ public class BaseForm extends Form {
                         new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond"))
         ));
         
-        //tb.addMaterialCommandToSideMenu("Newsfeed", FontImage.MATERIAL_UPDATE, e -> new NewsfeedForm(res).show());
-        //tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
+        tb.addMaterialCommandToSideMenu("Map", FontImage.MATERIAL_UPDATE, e -> new MapFormm());
+         tb.addMaterialCommandToSideMenu("Statistique", FontImage.MATERIAL_UPDATE, e -> new Statistique(res).show());
+         tb.addMaterialCommandToSideMenu("Ajouter Service", FontImage.MATERIAL_UPDATE, e -> new AjoutServiceForm(res).show());
+      
+        tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
         tb.addMaterialCommandToSideMenu("Deconnexion", FontImage.MATERIAL_EXIT_TO_APP, e -> {
             new SignInForm(res).show();
             SessionManager.pref.clearAll();

@@ -87,7 +87,7 @@ public class SignInForm extends BaseForm {
         signIn.addActionListener(e -> 
         {
                ServiceUtilisateur.getInstance().signin(mail, password, res);
-               //new WalkthruForm(res).show();
+               new WalkthruForm(res).show();
 
            
         });
