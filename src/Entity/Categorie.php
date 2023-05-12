@@ -2,38 +2,52 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
+/**
+ * Categorie
+ *
+ * @ORM\Table(name="categorie")
+ * @ORM\Entity
+ */
 class Categorie
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $fournisseur = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fournisseur", type="string", length=255, nullable=false)
+     */
+    private $fournisseur;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nomc = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomc", type="string", length=255, nullable=false)
+     */
+    private $nomc;
 
-    #[ORM\Column(length: 255)]
-    private ?string $usagepro = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usagepro", type="string", length=255, nullable=false)
+     */
+    private $usagepro;
 
-    #[ORM\Column(length: 255)]
-    private ?string $qualite = null;
-
-    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Materiel::class)]
-    private Collection $materiels;
-
-    public function __construct()
-    {
-        $this->materiels = new ArrayCollection();
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="qualite", type="string", length=255, nullable=false)
+     */
+    private $qualite;
 
     public function getId(): ?int
     {
@@ -88,38 +102,5 @@ class Categorie
         return $this;
     }
 
-    /**
-     * @return Collection<int, Materiel>
-     */
-    public function getMateriels(): Collection
-    {
-        return $this->materiels;
-    }
 
-    public function addMateriel(Materiel $materiel): self
-    {
-        if (!$this->materiels->contains($materiel)) {
-            $this->materiels->add($materiel);
-            $materiel->setCategorie($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMateriel(Materiel $materiel): self
-    {
-        if ($this->materiels->removeElement($materiel)) {
-            // set the owning side to null (unless already changed)
-            if ($materiel->getCategorie() === $this) {
-                $materiel->setCategorie(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->nomc;
-    }
 }

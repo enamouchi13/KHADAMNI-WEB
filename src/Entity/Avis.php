@@ -2,65 +2,59 @@
 
 namespace App\Entity;
 
-use App\Repository\AvisRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
-
-
-#[ORM\Entity(repositoryClass: AvisRepository::class)]
+/**
+ * Avis
+ *
+ * @ORM\Table(name="avis", indexes={@ORM\Index(name="IDX_8F91ABF0A76ED395", columns={"user_id"})})
+ * @ORM\Entity
+ */
 class Avis
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column(length: 60)]
     /**
-   *  @Assert\NotBlank(message="Le champ role est obligatoire")
-   * )
-   */
-    private ?string $role = null;
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 230)]
-     /**
-   *  @Assert\NotBlank(message="Le champ satisfaction est obligatoire")
-   * )
-   */
-    private ?string $nv_satif = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=60, nullable=false)
+     */
+    private $role;
 
-    #[ORM\Column(length: 250)]
-     /**
-   *  @Assert\NotBlank(message="Le champ du commentaire est obligatoire")
-   * )
-   */
-    private ?string $comment = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nv_satif", type="string", length=230, nullable=false)
+     */
+    private $nvSatif;
 
-    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Avis::class)]
-    private Collection $avis;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="string", length=250, nullable=false)
+     */
+    private $comment;
 
-    #[ORM\ManyToOne(inversedBy: 'avis')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Utilisateur $user = null;
-
-    public function __construct()
-    {
-        $this->avis = new ArrayCollection();
-    }
+    /**
+     * @var \Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(string $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getRole(): ?string
@@ -77,12 +71,12 @@ class Avis
 
     public function getNvSatif(): ?string
     {
-        return $this->nv_satif;
+        return $this->nvSatif;
     }
 
-    public function setNvSatif(string $nv_satif): self
+    public function setNvSatif(string $nvSatif): self
     {
-        $this->nv_satif = $nv_satif;
+        $this->nvSatif = $nvSatif;
 
         return $this;
     }
@@ -99,45 +93,17 @@ class Avis
         return $this;
     }
 
-    /**
-     * @return Collection<int, Avis>
-     */
-    public function getAvis(): Collection
-    {
-        return $this->avis;
-    }
-
-    public function addAvi(Avis $avi): self
-    {
-        if (!$this->avis->contains($avi)) {
-            $this->avis->add($avi);
-            $avi->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAvi(Avis $avi): self
-    {
-        if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
-            if ($avi->getUtilisateur() === $this) {
-                $avi->setUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getUser(): ?utilisateur
+    public function getUser(): ?Utilisateur
     {
         return $this->user;
     }
 
-    public function setUser(?utilisateur $user): self
+    public function setUser(?Utilisateur $user): self
     {
         $this->user = $user;
 
         return $this;
     }
+
+
 }

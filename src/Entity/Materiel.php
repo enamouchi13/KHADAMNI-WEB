@@ -2,48 +2,70 @@
 
 namespace App\Entity;
 
-use App\Repository\MaterielRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: MaterielRepository::class)]
+/**
+ * Materiel
+ *
+ * @ORM\Table(name="materiel", indexes={@ORM\Index(name="IDX_18D2B091BCF5E72D", columns={"categorie_id"})})
+ * @ORM\Entity
+ */
 class Materiel
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:'le champ Nom ne doit pas etre  vide')]
-    #[Assert\Length(
-        min: 2,
-        max: 255,
-        minMessage: 'le champ Nom doit être au moins  {{ limit }} characteres ',
-        maxMessage: 'le champ Nom ne doit pas depasser {{ limit }} characteres',
-    )]
-    private ?string $nomm = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomm", type="string", length=255, nullable=false)
+     */
+    private $nomm;
 
-    #[ORM\Column]
-    #[Assert\NotBlank(message:'le champ Prix ne doit pas etre  vide')]
-    #[Assert\Positive( message : 'Prix doit etre positive')]
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $prix;
 
-    private ?float $prix = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="quantite", type="integer", nullable=false)
+     */
+    private $quantite;
 
-    #[ORM\Column]
-    #[Assert\NotBlank(message:'le champ Quantité ne doit pas etre  vide')]
-    #[Assert\Positive( message : 'Quantité doit etre positive')]
-    private ?int $quantite = null;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="valabilite", type="date", nullable=false)
+     */
+    private $valabilite;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $valabilite = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     */
+    private $image;
 
-    #[ORM\Column(length: 255)]
-    private ?string $image = null;
-
-    #[ORM\ManyToOne(inversedBy: 'materiels')]
-    private ?Categorie $categorie = null;
+    /**
+     * @var \Categorie
+     *
+     * @ORM\ManyToOne(targetEntity="Categorie")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
+     * })
+     */
+    private $categorie;
 
     public function getId(): ?int
     {
@@ -121,4 +143,6 @@ class Materiel
 
         return $this;
     }
+
+
 }

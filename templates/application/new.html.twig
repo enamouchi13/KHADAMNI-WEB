@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}New Application{% endblock %}
+
+{% block body %}
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+<div class="container-fluid bg-primary py-5 bg-hero" style="margin-bottom: 90px;">
+    <h1>Appliquer</h1>
+
+    {{ include('application/_form.html.twig') }}
+
+    
+    </div>
+{% endblock %}

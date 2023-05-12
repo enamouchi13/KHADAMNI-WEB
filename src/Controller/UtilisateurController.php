@@ -51,7 +51,7 @@ public function new(Request $request, UtilisateurRepository $utilisateurReposito
         // Save the new user to the database
         $utilisateurRepository->save($utilisateur, true);
 
-        return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('loginn', [], Response::HTTP_SEE_OTHER);
     }
 
     return $this->renderForm('utilisateur/new.html.twig', [

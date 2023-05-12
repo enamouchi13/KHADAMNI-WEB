@@ -2,29 +2,56 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentaireRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CommentaireRepository::class)]
+/**
+ * Commentaire
+ *
+ * @ORM\Table(name="commentaire", indexes={@ORM\Index(name="IDX_67F068BC7294869C", columns={"article_id"})})
+ * @ORM\Entity
+ */
 class Commentaire
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $content = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="string", length=255, nullable=false)
+     */
+    private $content;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    private $createdAt;
 
-    #[ORM\ManyToOne(inversedBy: 'commentaires')]
-    private ?Post $article = null;
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="name_user", type="string", length=255, nullable=true)
+     */
+    private $nameUser;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nameUser = null;
+    /**
+     * @var \Post
+     *
+     * @ORM\ManyToOne(targetEntity="Post")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     * })
+     */
+    private $article;
 
     public function getId(): ?int
     {
@@ -48,9 +75,21 @@ class Commentaire
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getNameUser(): ?string
+    {
+        return $this->nameUser;
+    }
+
+    public function setNameUser(?string $nameUser): self
+    {
+        $this->nameUser = $nameUser;
 
         return $this;
     }
@@ -67,15 +106,5 @@ class Commentaire
         return $this;
     }
 
-    public function getNameUser(): ?string
-    {
-        return $this->nameUser;
-    }
 
-    public function setNameUser(string $nameUser): self
-    {
-        $this->nameUser = $nameUser;
-
-        return $this;
-    }
 }
