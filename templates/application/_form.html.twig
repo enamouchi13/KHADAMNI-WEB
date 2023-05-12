@@ -1,0 +1,13 @@
+
+<div class="text-center">
+{{ form_start(form, {'attr': {'class': 'centered-form', 'novalidate': 'novalidate'}}) }}
+       {{ form_start(form) }}
+        {{ form_row(form.num) }}
+        {{ form_row(form.role) }}
+        {{ form_row(form.location) }}
+        {{ form_row(form.document) }}
+        {{ form_row(form.idUser) }}
+      
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+</div>

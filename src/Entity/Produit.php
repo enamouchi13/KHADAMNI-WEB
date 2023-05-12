@@ -2,46 +2,62 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\File;
 
-#[ORM\Entity(repositoryClass: ProduitRepository::class)]
+/**
+ * Produit
+ *
+ * @ORM\Table(name="produit", indexes={@ORM\Index(name="IDX_29A5EC27A21214B7", columns={"categories_id"})})
+ * @ORM\Entity
+ */
 class Produit
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"le champ est vide")]
-    private ?string $nom = null;
-    #[ORM\Column]
-    #[Assert\File(
-        maxSize: '1024k',
-        mimeTypes: ['image/jpeg', 'image/png'],
-        mimeTypesMessage: 'Veuillez télécharger une image au format JPEG ou PNG et de taille inférieure à 1 Mo.'
-    )]
-    private ?string $image = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     */
+    private $nom;
 
-    #[ORM\Column]
-    #[Assert\Positive(message:"le prix doit etre positive")]
-    #[Assert\NotBlank(message:"le champ est vide")]
-    private ?int $prix = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     */
+    private $image;
 
-    #[ORM\Column]
-    #[Assert\Positive(message:"le prix doit etre positive")]
-    #[Assert\NotBlank(message:"le champ est vide")]
-    #[Assert\Length(min: 3)]
-    private ?int $stock = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="prix", type="integer", nullable=false)
+     */
+    private $prix;
 
-    #[ORM\ManyToOne(inversedBy: 'produits')]
-    private ?Categories $categories = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="stock", type="integer", nullable=false)
+     */
+    private $stock;
 
-
+    /**
+     * @var \Categories
+     *
+     * @ORM\ManyToOne(targetEntity="Categories")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categories_id", referencedColumnName="id")
+     * })
+     */
+    private $categories;
 
     public function getId(): ?int
     {
@@ -56,6 +72,18 @@ class Produit
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
@@ -84,19 +112,6 @@ class Produit
         return $this;
     }
 
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
     public function getCategories(): ?Categories
     {
         return $this->categories;
@@ -108,5 +123,6 @@ class Produit
 
         return $this;
     }
+
 
 }

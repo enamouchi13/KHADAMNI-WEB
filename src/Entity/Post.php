@@ -2,44 +2,60 @@
 
 namespace App\Entity;
 
-use App\Repository\PostRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-
-#[ORM\Entity(repositoryClass: PostRepository::class)]
+/**
+ * Post
+ *
+ * @ORM\Table(name="post")
+ * @ORM\Entity
+ */
 class Post
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     */
+    private $title;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $content = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", length=0, nullable=false)
+     */
+    private $content;
 
-    #[ORM\Column(length: 255)]
-    private ?string $image = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     */
+    private $image;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updateAt = null;
-
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentaire::class)]
-    private Collection $commentaires;
-
-    public function __construct()
-    {
-        $this->commentaires = new ArrayCollection();
-        $this->createdAt = new \DateTime();
-    }
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="update_at", type="datetime", nullable=true)
+     */
+    private $updateAt;
 
     public function getId(): ?int
     {
@@ -84,7 +100,6 @@ class Post
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-
         return $this->createdAt;
     }
 
@@ -107,38 +122,5 @@ class Post
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commentaire>
-     */
-    public function getCommentaires(): Collection
-    {
-        return $this->commentaires;
-    }
 
-    public function addCommentaire(Commentaire $commentaire): self
-    {
-        if (!$this->commentaires->contains($commentaire)) {
-            $this->commentaires->add($commentaire);
-            $commentaire->setArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommentaire(Commentaire $commentaire): self
-    {
-        if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
-            if ($commentaire->getArticle() === $this) {
-                $commentaire->setArticle(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->title;
-    }
 }

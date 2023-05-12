@@ -34,6 +34,13 @@ class TestController extends AbstractController
         ]);
     }
 
+    #[Route('/homefour', name: 'app_homefour')]
+    public function homefour(Request $request, ManagerRegistry $doctrine,MaterielRepository $materielRepository): Response
+    {
+
+        
+        return $this->render('test/homefour.html.twig');
+    }
     #[Route('/ouvrier/{categoryId?}', name: 'app_homeouvrier')]
     public function showfront(Request $request, ManagerRegistry $doctrine, ProduitRepository $produitRepository, $categoryId = null): Response
     {

@@ -77,13 +77,13 @@ class Login extends AbstractController
                         case 'admin':
                             return $this->redirectToRoute('app_utilisateur_index');
                         case 'client':
-                            return $this->redirectToRoute('test');
+                            return $this->redirectToRoute('app_home_client');
                         case 'ouvrier':
-                            return $this->redirectToRoute('app_homeouvrier');
-                        case 'fourniseur':
-                            return $this->redirectToRoute('app_homefourniseur');
+                            return $this->redirectToRoute('app_home');
+                        case 'fournisseur':
+                            return $this->redirectToRoute('app_homefour');
                         default:
-                            return $this->redirectToRoute('test');
+                            return $this->redirectToRoute('loginn');
                     }
                 } else {
                     $error="entrer votre mot mot de passe";

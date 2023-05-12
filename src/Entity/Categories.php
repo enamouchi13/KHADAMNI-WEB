@@ -2,44 +2,38 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoriesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
-#[ORM\Entity(repositoryClass: CategoriesRepository::class)]
+/**
+ * Categories
+ *
+ * @ORM\Table(name="categories")
+ * @ORM\Entity
+ */
 class Categories
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    private ?int $id = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=255, nullable=false)
+     */
+    private $libelle;
 
-    #[ORM\Column(length: 255)]
-
-    #[Assert\NotBlank(message:"le champ est vide")]
-    private ?string $libelle = null;
-
-
-
-    #[ORM\Column(nullable: true)]
-    #[Assert\Length(min: 3)]
-    #[Assert\Positive(message:"la quantite doit etre positive")]
-    #[Assert\NotBlank(message:"le champ est vide")]
-    private ?int $quantite = null;
-
-    #[ORM\OneToMany(mappedBy: 'categories', targetEntity: Produit::class)]
-    private Collection $produits;
-
-    public function __construct()
-    {
-        $this->produits = new ArrayCollection();
-    }
-
-
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="quantite", type="integer", nullable=true)
+     */
+    private $quantite;
 
     public function getId(): ?int
     {
@@ -58,14 +52,6 @@ class Categories
         return $this;
     }
 
-
-
-
-    public function __toString(): string
-    {
-        return $this->libelle;
-    }
-
     public function getQuantite(): ?int
     {
         return $this->quantite;
@@ -78,34 +64,5 @@ class Categories
         return $this;
     }
 
-    /**
-     * @return Collection<int, Produit>
-     */
-    public function getProduits(): Collection
-    {
-        return $this->produits;
-    }
-
-    public function addProduit(Produit $produit): self
-    {
-        if (!$this->produits->contains($produit)) {
-            $this->produits->add($produit);
-            $produit->setCategories($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduit(Produit $produit): self
-    {
-        if ($this->produits->removeElement($produit)) {
-            // set the owning side to null (unless already changed)
-            if ($produit->getCategories() === $this) {
-                $produit->setCategories(null);
-            }
-        }
-
-        return $this;
-    }
 
 }

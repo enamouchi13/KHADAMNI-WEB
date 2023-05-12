@@ -1,0 +1,47 @@
+
+{% extends 'base1.html.twig' %}
+
+{% block title %}Application index{% endblock %}
+
+{% block body %}
+    <h1>Application index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Num</th>
+                <th>Role</th>
+                <th>Location</th>
+                <th>Document</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for application in applications %}
+            <tr>
+                <td>{{ application.id }}</td>
+                <td>{{ application.num }}</td>
+                <td>{{ application.role }}</td>
+                <td>{{ application.location }}</td>
+                <td>{{ application.document }}</td>
+                <td>
+                    <a href="{{ path('app_application_show', {'id': application.id}) }}">show</a>
+                    <a href="{{ path('app_application_edit', {'id': application.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+     <div class="navigation">
+    {{ knp_pagination_render(applications) }}
+</div>
+
+    <a href="{{ path('app_application_new') }}">Create new</a>
+    
+   
+{% endblock %}
